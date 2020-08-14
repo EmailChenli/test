@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="/layui/layui.js"></script>
+<link rel="stylesheet" href="/layui/css/layui.css">
+
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">员工信息管理系统</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item">
+                <a th:href="@{/user/welcome}" target="iframe">控制台</a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="">商品管理</a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="">用户</a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">其它系统</a>
+                <dl class="layui-nav-child">
+                    <dd>
+                        <a href="javascript:;">邮件管理</a>
+                    </dd>
+                    <dd>
+                        <a href="javascript:;">消息管理</a>
+                    </dd>
+                    <dd>
+                        <a href="javascript:;">授权管理</a>
+                    </dd>
+                </dl>
+            </li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="/Image/loginimg.jpg" class="layui-nav-img"> [[${session.user}]]
+                </a>
+                <dl class="layui-nav-child">
+                    <dd>
+                        <a href="">基本资料</a>
+                    </dd>
+                    <dd>
+                        <a href="">安全设置</a>
+                    </dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item">
+                <a th:href="@{Login}">退出</a>
+            </li>
+        </ul>
+    </div>
+     <!--相关的css映射关系  -->
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;" >用户管理</a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a th:href="@{/user/userList}" target="iframe">用户列表</a>
+                        </dd>
+                       
+                        <dd>
+                            <a th:if="${role} eq admin" th:href="@{/user/userDeList}" target="iframe">用户删除信息</a>
+                        </dd>
+                        
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">员工入职管理</a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="/user/entryList" target="iframe">员工入职信息列表</a>
+                        </dd>
+                        <dd>
+                            <a th:if="${role} eq admin" href="/user/entryDeList" target="iframe">员工入职删除信息</a>
+                        </dd>
+                      
+                    </dl>
+                </li>
+                
+                <li class="layui-nav-item">
+                    <a href="javascript:;">员工离职管理</a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="/user/dimissionList" target="iframe">员工离职信息列表</a>
+                        </dd>
+                        <dd>
+                            <a th:if="${role} eq admin" href="/user/dimissionDeList" target="iframe">员工离职删除信息</a>
+                        </dd>
+                      
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">系统管理</a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="/user/change" target="iframe">修改密码</a>
+                        </dd>
+                    </dl>
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+
+  	<div class="layui-body ">
+     		   <!-- 内容主体区域 -->
+     
+      <!-- 默认显示 -->
+          <iframe name="iframe" th:src=@{/user/welcome} frameborder="0" height="600px" width="100%">
+          </iframe>
+          
+   	 </div>
+
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        © layui.com - 底部固定区域
+    </div>
+</div>
+<script>
+    layui.use('element', function(){
+        //需要依赖element模块
+       // var element = layui.element();
+        //element.init();
+    });
+</script>
+
+</body>
+
+</html>
